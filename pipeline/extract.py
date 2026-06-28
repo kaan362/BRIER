@@ -45,6 +45,12 @@ JSON formatı:
         ]
     )
     raw = response.content[0].text
+    raw = raw.strip()
+    if raw.startswith("```json"):
+        raw = raw[7:]
+    if raw.endswith("```"):
+        raw = raw[:-3]
+    raw = raw.strip()
     data = json.loads(raw)
     prediction = Prediction(**data)
 
