@@ -73,5 +73,27 @@ def main():
         result = resolve_prediction(prediction)
         print(f"Resolved: {prediction['asset']} → {result}")
 
+    calculate_analyst_scores()
+
+def calculate_analyst_scores():
+    analysts = supabase.table("analysts").select("*").execute()
+    
+    for analyst in analysts.data:
+        outcomes = supabase.table("outcomes")\
+            .select("*, predictions!inner(analyst_id)")\
+            .eq("predictions.analyst_id", analyst["id"])\
+            .execute()
+        
+        
+        total = len(outcomes.data)
+        hits = len([o for o in outcomes.data if o["result"] == "hit"])
+        
+        if total > 0:
+            win_rate = hits / total * 100
+            print(f"{analyst['handle']}: {hits}/{total} hit, win rate: {win_rate:.1f}%")
+            supabase.table("analysts").update({
+                "win_rate": win_rate,
+                "sample_size": total
+            }).eq("id", analyst["id"]).execute()
 if __name__ == "__main__":
     main()
