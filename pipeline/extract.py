@@ -4,6 +4,8 @@ from anthropic import Anthropic
 from supabase import create_client
 from pydantic import BaseModel
 import json
+from datetime import datetime, timezone
+
 
 
 load_dotenv()
@@ -62,6 +64,7 @@ JSON formatı:
         "target_price": prediction.target_price,
         "stop_price": prediction.stop_price,
         "horizon_end": prediction.horizon_end,
+        "horizon_start": datetime.now(timezone.utc).isoformat(),
         "status": "pending"
     }).execute()
 
@@ -69,6 +72,6 @@ JSON formatı:
 
 
 if __name__ == "__main__":
-    test_text = "BTC bu ay 70 bin dolara çıkacak, stop loss 60 bin, hedef tarih 2024-12-31"
+    test_text = "BTC bu ay 70 bin dolara çıkacak, stop loss 60 bin, hedef tarih 2026-12-31"
     result = extract_prediction(test_text, analyst_id=1, source_id=1)
     print(result)
