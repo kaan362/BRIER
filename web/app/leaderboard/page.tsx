@@ -21,7 +21,7 @@ export default async function Leaderboard() {
           {analysts?.map((analyst) => (
             <tr key={analyst.id}>
               <td>{analyst.display_name}</td>
-              <td>{analyst.win_rate !== null ? `${analyst.win_rate.toFixed(1)}%` : "Henüz veri yok"}</td>
+              <td>{analyst.win_rate !== null ? `${analyst.win_rate.toFixed(1)}%`:"no data"}</td>
               <td>{analyst.sample_size ?? "-"}</td>
             </tr>
         
