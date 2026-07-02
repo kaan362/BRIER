@@ -15,7 +15,7 @@ export default async function Leaderboard() {
           <tr className="border-b text-left text-sm font-semibold text-red-700">
             <th className="p-2">Analist</th>
             <th className="p-2">Win Rate</th>
-            <th className="p-2">Tahmin Sayısı</th>
+            <th className="p-2">Sample Size</th>
           </tr>
         </thead>
         <tbody>
