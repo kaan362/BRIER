@@ -12,7 +12,7 @@ export default async function Leaderboard() {
       <h1 className="text-2xl font-bold mb-6">Brier Leaderboard</h1>
       <table className="w-full border-collapse">
         <thead>
-          <tr className="border-b text-left">
+          <tr className="border-b text-left text-sm font-semibold text-red-700">
             <th className="p-2">Analist</th>
             <th className="p-2">Win Rate</th>
             <th className="p-2">Tahmin Sayısı</th>
@@ -22,7 +22,7 @@ export default async function Leaderboard() {
           {analysts?.map((analyst) => (
             <tr key={analyst.id} className="border-b">
               <td className="p-2">
-                <Link href={`/analyst/${analyst.id}`} className="text-blue-600 hover:underline">
+                <Link href={`/analyst/${analyst.id}`} className="text-indigo-600 hover:underline">
                   {analyst.display_name}
                 </Link>
               </td>
