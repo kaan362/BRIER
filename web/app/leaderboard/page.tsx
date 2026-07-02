@@ -1,4 +1,5 @@
 import { supabase } from '../../lib/supabase'
+import Link from 'next/link'
 
 export default async function Leaderboard() {
   const { data: analysts } = await supabase
@@ -7,24 +8,27 @@ export default async function Leaderboard() {
     .order('win_rate', { ascending: false })
 
   return (
-    <main>
-      <h1>Brier Leaderboard</h1>
-      <table>
+    <main className="max-w-2xl mx-auto p-8">
+      <h1 className="text-2xl font-bold mb-6">Brier Leaderboard</h1>
+      <table className="w-full border-collapse">
         <thead>
-          <tr>
-            <th>Analist</th>
-            <th>Win Rate</th>
-            <th>Tahmin Sayısı</th>
+          <tr className="border-b text-left">
+            <th className="p-2">Analist</th>
+            <th className="p-2">Win Rate</th>
+            <th className="p-2">Tahmin Sayısı</th>
           </tr>
         </thead>
         <tbody>
           {analysts?.map((analyst) => (
-            <tr key={analyst.id}>
-              <td>{analyst.display_name}</td>
-              <td>{analyst.win_rate !== null ? `${analyst.win_rate.toFixed(1)}%`:"no data"}</td>
-              <td>{analyst.sample_size ?? "-"}</td>
+            <tr key={analyst.id} className="border-b">
+              <td className="p-2">
+                <Link href={`/analyst/${analyst.id}`} className="text-blue-600 hover:underline">
+                  {analyst.display_name}
+                </Link>
+              </td>
+              <td className="p-2">{analyst.win_rate !== null ? `${analyst.win_rate.toFixed(1)}%` : "no data"}</td>
+              <td className="p-2">{analyst.sample_size ?? "-"}</td>
             </tr>
-        
           ))}
         </tbody>
       </table>
