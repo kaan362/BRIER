@@ -47,7 +47,7 @@ def resolve_prediction(prediction: dict):
             if price >= target_price:
                 result = "hit"
                 resolved_price = price
-                resolved_at = resolved_at = datetime.fromtimestamp(ts / 1000, tz=timezone.utc)
+                resolved_at = datetime.fromtimestamp(ts / 1000, tz=timezone.utc)
                 break
             elif price <= stop_price:
                 result = "stopped"
